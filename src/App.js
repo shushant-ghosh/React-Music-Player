@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import About from './Components/About'
+import Contact from './Components/Contact'
+import Home from './Components/Home'
+import Menu from './Components/Menu'
+import Tracks from './Components/Screens/Tracks'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          {/* Reference Router */}
+          <Route exact path="/" render={() => <Menu><Home/></Menu>}></Route>
+          <Route exact path="/home" render={() => <Menu><Home/></Menu>}></Route>
+          <Route exact path="/about" render={() => <Menu><About/></Menu>}></Route>
+          <Route exact path="/contact" render={() => <Menu><Contact/></Menu>}></Route>
+          <Route exact path="/tracks/:id" render={(props) => <Menu><Tracks {...props} /></Menu>}></Route>
+
+          {/* Component Router */}
+          {/* <Route exact path="/tracks/:id" component={Tracks}></Route> */}
+        </Switch>
+      </BrowserRouter>
+    )
+  }
 }
-
-export default App;
+export default App
